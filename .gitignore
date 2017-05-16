@@ -1,0 +1,6 @@
+artifacts/
+*.gem
+.env
+.idea/
+# http://stackoverflow.com/questions/4151495/should-gemfile-lock-be-included-in-gitignore
+Gemfile.lock
