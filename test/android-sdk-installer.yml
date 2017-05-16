@@ -1,0 +1,6 @@
+version: 25.2.3
+platform: linux
+debug: true
+components:
+  dropbox_path: /Builds/dropbox-deployment-test
+  artifacts_path: ../README.md

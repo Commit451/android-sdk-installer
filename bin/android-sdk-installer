@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'android-sdk-installer'
+
+installer = AndroidInstaller::Installer.new
+installer.install
