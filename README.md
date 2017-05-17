@@ -35,8 +35,8 @@ Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired
 
 ## Deployment
 1. Adjust the version in the gemspec
-2. `gem build dropbox-deployment.gemspec`
-3. `gem push dropbox-deployment-version.number.here.gem`
+2. `gem build android-sdk-installer.gemspec`
+3. `gem push android-sdk-installer-version.number.here.gem`
 4. Tag release in git
 
 ## Thanks
