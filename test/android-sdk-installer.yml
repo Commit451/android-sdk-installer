@@ -2,9 +2,6 @@ version: 25.2.3
 platform: linux
 debug: true
 components:
-  - platform-tools
-  - tools
-  - build-tools-25.0.3
-  - android-25
-  - extra-google-m2repository
-  - extra-android-m2repository
+  - build-tools;25.0.
+  - platforms;android-25
+  - extras;android;m2repository
