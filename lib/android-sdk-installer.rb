@@ -47,8 +47,8 @@ module AndroidInstaller
       sdk_path[key_platform] = platform
       @@logger.debug('Installing version ' + version + ' for platform ' + platform + ' with url ' + sdk_url + sdk_path)
       # download_file(sdk_url, sdk_path, 'android-sdk.zip')
-      #exec('unzip -q android-sdk.zip -d android-sdk')
-      #exec('export ANDROID_HOME=$PWD/android-sdk')
+      exec('unzip -q android-sdk.zip -d android-sdk')
+      exec('export ANDROID_HOME=$PWD/android-sdk')
       components = config['components']
       components.each {|component|
         @@logger.debug('Installing component ' + component)
