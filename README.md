@@ -29,7 +29,12 @@ After creating this configuration, all you need to do is run:
 ```shell
 android-sdk-installer
 ```
-
+## Components
+The components are defined by the [sdkmanager](https://developer.android.com/studio/command-line/sdkmanager.html) command line tool. You can get a list of available components by running:
+```shell
+sdkmanager --list
+```
+on a machine with the Android SDK installed
 ## Test Locally
 Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired.
 
