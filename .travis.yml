@@ -3,4 +3,4 @@ language: ruby
 rvm:
   - 2.2.6
 
-script: "ruby lib/android-sdk-installer.rb"
+script: "ruby test/test.rb"
