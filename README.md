@@ -13,13 +13,13 @@ gem install android-sdk-installer
 ## Usage
 The installer looks for a `android-sdk-installer.yml` file in order to configure where the artifacts are and where they should go.
 For example:
-```yml
+```yaml
 platform: linux
 components:
   - build-tools;25.0.3
   - platforms;android-25
-  - extras;android;m2repository #support libs
-  - extras;google;m2repository #google play services lib
+  - extras;android;m2repository # support libs
+  - extras;google;m2repository # google play services lib
 ```
 After creating this configuration, all you need to do is run:
 ```shell
@@ -39,6 +39,17 @@ sdkmanager --list
 ```
 on a machine with the Android SDK installed
 
+## Config
+Additional configuration can be added to `android-sdk-installer.yml`. The following is a complete example with all possible values:
+```yaml
+platform: linux # the platform
+version: 3859397 # the version
+debug: true # more logs
+ignore_existing: true # command line tools will not install if ANDROID_HOME is found. Forces installation 
+components: # list of the components to install
+  - build-tools;25.0.3
+```
+If no `android-sdk-installer.yml` file is found, the default command line tools will be installed (for linux)
 ## Test Locally
 Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired.
 

@@ -1,4 +1,4 @@
-require 'yaml'
+require 'psych'
 require 'logger'
 
 module AndroidInstaller
@@ -37,11 +37,11 @@ module AndroidInstaller
 
     def install
       # Validation
-      unless File.file?(CONFIG_FILE)
-        puts "\nNo config file found. You need a file called `android-sdk-installer.yml` with the configuration. See the README for details\n\n"
-        exit(1)
+      if File.file?('android-sdk.zip')
+        config = Psych.load_file CONFIG_FILE
+      else
+        config = Psych.load("foo: true\nbar: false")
       end
-      config = YAML.load_file(CONFIG_FILE)
       version = '3859397'
       if config.has_key?('version')
         version = config['version']
@@ -70,13 +70,15 @@ module AndroidInstaller
       end
 
       components = config['components']
-      components.each do |component|
-        @@logger.debug('Installing component ' + component)
-        output = `echo y | $ANDROID_HOME/tools/bin/sdkmanager "#{component}"`
-        @@logger.debug(output)
-        if output.include? 'Warning'
-          puts "\nError installing component " + component + "\n"
-          puts output
+      if components != nil
+        components.each do |component|
+          @@logger.debug('Installing component ' + component)
+          output = `echo y | $ANDROID_HOME/tools/bin/sdkmanager "#{component}"`
+          @@logger.debug(output)
+          if output.include? 'Warning'
+            puts "\nError installing component " + component + "\n"
+            puts output
+          end
         end
       end
     end
