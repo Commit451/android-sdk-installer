@@ -21,9 +21,14 @@ module AndroidInstaller
       sdk_path = SDK_PATH
       sdk_path[KEY_SDK_TOOLS] = version
       sdk_path[KEY_PLATFORM] = platform
-      @@logger.debug('Downloading version ' + version + ' for platform ' + platform + ' with url ' + SDK_URL + sdk_path)
-      `wget --quiet --output-document=android-sdk.zip #{SDK_URL + sdk_path}`
+      url = SDK_URL + sdk_path
+      @@logger.debug('Downloading version ' + version + ' for platform ' + platform + ' with url ' + url)
+      `wget --quiet --output-document=android-sdk.zip #{url}`
       # TODO: error out here if file not found
+      unless File.file?('android-sdk.zip')
+        puts "\nAndroid SDK not found at url #{url}. Make sure you have the right values in your #{CONFIG_FILE}\n"
+        exit(1)
+      end
       @@logger.debug('Unzipping android-sdk.zip')
       `unzip -q android-sdk.zip -d $PWD/android-sdk`
       `rm android-sdk.zip`
@@ -51,7 +56,14 @@ module AndroidInstaller
         platform = config['platform']
       end
 
-      if ENV['ANDROID_HOME'].nil?
+      ignore_existing = false
+      if config.has_key?('ignore_existing')
+        ignore_existing = config['ignore_existing']
+        @@logger.debug("Ignore existing set to #{ignore_existing}")
+      end
+
+      should_install = ENV['ANDROID_HOME'].nil? || ignore_existing
+      if should_install
         install_command_line_sdk(platform, version)
       else
         @@logger.debug('ANDROID_HOME already set. Skipping command line tools install')
