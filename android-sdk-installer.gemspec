@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'android-sdk-installer'
-  spec.version       = '0.0.2'
+  spec.version       = '0.0.3'
   spec.authors       = ['Commit 451']
   spec.email         = ['commit451@gmail.com']
 
