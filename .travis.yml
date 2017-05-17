@@ -1,13 +1,8 @@
 language: ruby
 
-env:
-  - ANDROID_HOME=$PWD/android-sdk
-
 rvm:
   - 2.2.6
 
 script:
   - cd test
   - ruby test.rb
-  - ls
-  - adb devices
