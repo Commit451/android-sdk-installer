@@ -32,7 +32,6 @@ module AndroidInstaller
         exit(1)
       end
       config = YAML.load_file('android-sdk-installer.yml')
-      testing = false
       unless config.has_key?('version')
         puts "\nError in config file! Build file must contain a `version` string.\n\n"
         exit(1)
@@ -46,7 +45,7 @@ module AndroidInstaller
       sdk_path[key_sdk_tools] = version
       sdk_path[key_platform] = platform
       @@logger.debug('Installing version ' + version + ' for platform ' + platform + ' with url ' + sdk_url + sdk_path)
-      # download_file(sdk_url, sdk_path, 'android-sdk.zip')
+      download_file(sdk_url, sdk_path, 'android-sdk.zip')
       exec('unzip -q android-sdk.zip -d android-sdk')
       exec('export ANDROID_HOME=$PWD/android-sdk')
       components = config['components']
