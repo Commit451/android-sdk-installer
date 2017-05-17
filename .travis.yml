@@ -3,4 +3,6 @@ language: ruby
 rvm:
   - 2.2.6
 
-script: "ruby test/test.rb"
+script:
+  - cd test
+  - ruby test.rb
