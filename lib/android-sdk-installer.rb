@@ -1,6 +1,5 @@
 require 'yaml'
 require 'logger'
-require 'net/http'
 
 module AndroidInstaller
   # Installs components for building Android projects
@@ -10,15 +9,6 @@ module AndroidInstaller
     def initialize
       @@logger = Logger.new(STDOUT)
       @@logger.level = Logger::WARN
-    end
-
-    def download_file(base_url, path, file_name)
-      Net::HTTP.start(base_url) do |http|
-        resp = http.get(path)
-        open(file_name, "wb") do |file|
-          file.write(resp.body)
-        end
-      end
     end
 
     def install
@@ -45,20 +35,15 @@ module AndroidInstaller
       sdk_path[key_sdk_tools] = version
       sdk_path[key_platform] = platform
       @@logger.debug('Installing version ' + version + ' for platform ' + platform + ' with url ' + sdk_url + sdk_path)
-      download_file(sdk_url, sdk_path, 'android-sdk.zip')
+      exec('wget --quiet --output-document=android-sdk.zip ' + sdk_url + sdk_path)
       exec('unzip -q android-sdk.zip -d android-sdk')
+      exec('rm android-sdk.zip')
       exec('export ANDROID_HOME=$PWD/android-sdk')
       components = config['components']
       components.each {|component|
         @@logger.debug('Installing component ' + component)
-        output = ''
-        if Gem.win_platform?
-          output = exec('echo y | %ANDROID_HOME%\tools\bin\sdkmanager ' + component)
-          @@logger.debug(output)
-        else
-          output = exec('echo y | $ANDROID_HOME/tools/bin/sdkmanager ' + component)
-          @@logger.debug(output)
-        end
+        output = exec('echo y | $ANDROID_HOME/tools/bin/sdkmanager ' + component)
+        @@logger.debug(output)
         puts output
         if output.include? 'Warning'
           puts "\nError installing component " + component + "\n"
