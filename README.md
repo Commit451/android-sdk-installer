@@ -17,12 +17,10 @@ For example:
 version: 25.2.3
 platform: linux
 components:
-  - platform-tools
-  - tools
-  - build-tools-25.0.3
-  - android-25
-  - extra-google-m2repository
-  - extra-android-m2repository
+  - build-tools;25.0.3
+  - platforms;android-25
+  - extras;android;m2repository
+  - extras;google;m2repository
 
 ```
 After creating this configuration, all you need to do is run:
@@ -35,6 +33,7 @@ The components are defined by the [sdkmanager](https://developer.android.com/stu
 sdkmanager --list
 ```
 on a machine with the Android SDK installed
+
 ## Test Locally
 Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired.
 

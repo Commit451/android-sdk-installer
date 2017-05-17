@@ -38,18 +38,17 @@ module AndroidInstaller
       exec('wget --quiet --output-document=android-sdk.zip ' + sdk_url + sdk_path)
       exec('unzip -q android-sdk.zip -d android-sdk')
       exec('rm android-sdk.zip')
-      exec('export ANDROID_HOME=$PWD/android-sdk')
       components = config['components']
-      components.each {|component|
+      components.each do |component|
         @@logger.debug('Installing component ' + component)
-        output = exec('echo y | $ANDROID_HOME/tools/bin/sdkmanager ' + component)
+        output = exec('echo y | android-sdk/tools/bin/sdkmanager ' + component)
         @@logger.debug(output)
         puts output
         if output.include? 'Warning'
           puts "\nError installing component " + component + "\n"
           puts output
         end
-      }
+      end
     end
   end
 end
