@@ -37,7 +37,7 @@ module AndroidInstaller
 
     def install
       # Validation
-      if File.file?('android-sdk.zip')
+      if File.file?(CONFIG_FILE)
         config = Psych.load_file CONFIG_FILE
       else
         config = Psych.load("foo: true\nbar: false")
