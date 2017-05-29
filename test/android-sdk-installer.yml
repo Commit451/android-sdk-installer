@@ -1,6 +1,5 @@
 platform: linux
 debug: true
-ignore_existing: true
 components:
   - build-tools;25.0.3
   - platforms;android-25

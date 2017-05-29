@@ -2,5 +2,5 @@
 
 require 'android-sdk-installer'
 
-installer = AndroidInstaller::Installer.new
+installer = AndroidInstaller::Installer.new(ARGV)
 installer.install
