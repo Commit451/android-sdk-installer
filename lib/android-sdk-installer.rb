@@ -24,7 +24,6 @@ module AndroidInstaller
       url = SDK_URL + sdk_path
       @@logger.debug('Downloading version ' + version + ' for platform ' + platform + ' with url ' + url)
       `wget --quiet --output-document=android-sdk.zip #{url}`
-      # TODO: error out here if file not found
       unless File.file?('android-sdk.zip')
         puts "\nAndroid SDK not found at url #{url}. Make sure you have the right values in your #{CONFIG_FILE}\n"
         exit(1)
@@ -33,6 +32,10 @@ module AndroidInstaller
       `unzip -q android-sdk.zip -d $PWD/android-sdk`
       `rm android-sdk.zip`
       `export ANDROID_HOME=$PWD/android-sdk`
+      # Gets rid of a warning
+      # https://askubuntu.com/questions/885658/android-sdk-repositories-cfg-could-not-be-loaded
+      `touch ~/.android/repositories.cfg`
+      @@logger.debug('SDK base installed to ' + Dir.pwd + 'android-sdk')
     end
 
     def install
