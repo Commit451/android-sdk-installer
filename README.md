@@ -55,6 +55,28 @@ If no `android-sdk-installer.yml` file is found, the default command line tools 
 ## Options
 In addition to configuration within `android-sdk-installer.yml`, some configuration can be done via command line arguments. To see a list of the options, run `android-sdk-installer -h`
 
+## Travis
+Usage with Travis can be a little odd due to the fact that `ANDROID_HOME` needs to be set before install. Here is an example configuration:
+```yml
+language: java
+
+env:
+  - ANDROID_HOME=$PWD/android-sdk
+
+jdk:
+  - oraclejdk8
+
+before_install:
+  - rvm install 2.3.4
+  - gem install android-sdk-installer
+  - android-sdk-installer -i
+
+script: "./gradlew build"
+```
+
+## Docker
+A [docker image](https://hub.docker.com/r/commit451/android-sdk-installer/) is provided for you to use for your builds. 
+
 ## Test Locally
 Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired.
 

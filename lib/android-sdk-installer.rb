@@ -14,12 +14,16 @@ module AndroidInstaller
     CONFIG_FILE = 'android-sdk-installer.yml'
     REPOSITORIES_CONFIG_FILE = '~/.android/repositories.cfg'
     ANDROID_DIR = '~/.android'
+    DEFAULT_PLATFORM = 'linux'
+    DEFAULT_VERSION = '3859397'
 
     def initialize(arguments)
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::WARN
 
       @ignore_existing = false
+      @platform = DEFAULT_PLATFORM
+      @version = DEFAULT_VERSION
       create_options_parser(arguments)
     end
 
@@ -30,6 +34,12 @@ module AndroidInstaller
         opts.separator 'Options'
         opts.on('-i', '--ignore', 'Ignore existing Android SDK, denoted by the existence of the ANDROID_HOME env variable') do
           @ignore_existing = true
+        end
+        opts.on('-p PLATFORM', '--platform PLATFORM', 'Set the platform. Must be one of linux or darwin') do |platform|
+          @platform = platform
+        end
+        opts.on('-v VERSION', 'Set the version of the sdk to install') do |version|
+          @version = version
         end
         opts.on('-h', '--help', 'Displays help') do
           puts opts.help
@@ -72,18 +82,16 @@ module AndroidInstaller
       else
         config = Psych.load("foo: true\nbar: false")
       end
-      version = '3859397'
       if config.has_key?('version')
-        version = config['version']
+        @version = config['version']
       end
       if config['debug']
         @logger.level = Logger::DEBUG
         @logger.debug('We are in debug mode')
       end
 
-      platform = 'linux'
       if config.has_key?('platform')
-        platform = config['platform']
+        @platform = config['platform']
       end
 
       if config.has_key?('ignore_existing')
@@ -93,7 +101,7 @@ module AndroidInstaller
 
       should_install = ENV['ANDROID_HOME'].nil? || @ignore_existing
       if should_install
-        install_command_line_sdk(platform, version)
+        install_command_line_sdk(@platform, @version)
       else
         @logger.debug('ANDROID_HOME already set. Skipping command line tools install')
       end
