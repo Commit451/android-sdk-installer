@@ -25,6 +25,7 @@ After creating this configuration, all you need to do is run:
 ```shell
 android-sdk-installer
 ```
+If you run `android-sdk-installer` with no `android-sdk-installer.yml` present, the [sdkmanager](https://developer.android.com/studio/command-line/sdkmanager.html) will be installed.
 
 ## Version
 Version is the SDK Tools version, defaulting to 26.0.2 (3859397). The latest version number can be found at the bottom of the page [here](https://developer.android.com/studio/index.html) as a part of the download URL.
@@ -37,7 +38,7 @@ The components are defined by the [sdkmanager](https://developer.android.com/stu
 ```shell
 sdkmanager --list
 ```
-on a machine with the Android SDK installed
+on a machine with the Android SDK installed.
 
 ## Config
 Additional configuration can be added to `android-sdk-installer.yml`. The following is a complete example with all possible values:
@@ -50,6 +51,10 @@ components: # list of the components to install
   - build-tools;25.0.3
 ```
 If no `android-sdk-installer.yml` file is found, the default command line tools will be installed (for linux)
+
+## Options
+In addition to configuration within `android-sdk-installer.yml`, some configuration can be done via command line arguments. To see a list of the options, run `android-sdk-installer -h`
+
 ## Test Locally
 Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired.
 
@@ -59,9 +64,13 @@ Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired
 3. `gem push android-sdk-installer-version.number.here.gem`
 4. Tag release in git
 
+## Note
+This tool will automatically accept licenses for the Android SDK. Please read and understand these licenses before using this tool and assure you agree with the terms. 
+
 ## Thanks
 Thanks to the following for being a great reference on how to create a command line Ruby Gem:
   - http://robdodson.me/how-to-write-a-command-line-ruby-gem/
+  - https://github.com/cesarferreira/dryrun
 
 ## License
 
