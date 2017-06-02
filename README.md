@@ -1,5 +1,5 @@
 # android-sdk-installer
-Install Android SDK
+Easy Android SDK installation for CI servers
 
 [![Build Status](https://travis-ci.org/Commit451/android-sdk-installer.svg?branch=master)](https://travis-ci.org/Commit451/android-sdk-installer)
 [![Gem](https://img.shields.io/gem/v/android-sdk-installer.svg)](https://rubygems.org/gems/android-sdk-installer)
@@ -77,7 +77,7 @@ script: "./gradlew build"
 ## Docker
 A [docker image](https://hub.docker.com/r/commit451/android-sdk-installer/) is provided for you to use for your builds. 
 
-## Test Locally
+## Test
 Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired.
 
 ## Deployment
