@@ -81,8 +81,8 @@ module AndroidInstaller
     end
 
     def add_license_acceptance
-      `mkdir "$ANDROID_HOME/licenses" || true`
-      `echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"`
+      `mkdir $ANDROID_HOME/licenses`
+      `echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > $ANDROID_HOME/licenses/android-sdk-license`
     end
 
     def install
