@@ -87,7 +87,7 @@ Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired
 4. Tag release in git
 
 ## Note
-This tool will automatically accept licenses for the Android SDK. Please read and understand these licenses before using this tool and assure you agree with the terms. 
+This tool will automatically accept licenses for the Android SDK, and will add files indicating that you have accepted the Android SDK licenses. Please read and understand these licenses before using this tool and assure you agree with the terms. 
 
 ## Thanks
 Thanks to the following for being a great reference on how to create a command line Ruby Gem:

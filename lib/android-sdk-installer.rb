@@ -64,6 +64,12 @@ module AndroidInstaller
       `unzip -q -o android-sdk.zip -d $PWD/android-sdk`
       `rm android-sdk.zip`
       `export ANDROID_HOME=$PWD/android-sdk`
+      create_dummy_cfg
+      add_license_acceptance
+      @logger.debug('SDK base installed to ' + Dir.pwd + '/android-sdk')
+    end
+
+    def create_dummy_cfg
       # Gets rid of a warning
       # https://askubuntu.com/questions/885658/android-sdk-repositories-cfg-could-not-be-loaded
       unless Dir.exist?(ANDROID_DIR)
@@ -72,7 +78,11 @@ module AndroidInstaller
       unless File.file?(REPOSITORIES_CONFIG_FILE)
         `touch #{REPOSITORIES_CONFIG_FILE}`
       end
-      @logger.debug('SDK base installed to ' + Dir.pwd + '/android-sdk')
+    end
+
+    def add_license_acceptance
+      `mkdir "$ANDROID_HOME/licenses" || true`
+      `echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"`
     end
 
     def install
