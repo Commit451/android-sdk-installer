@@ -31,7 +31,7 @@ If you run `android-sdk-installer` with no `android-sdk-installer.yml` present, 
 Version is the SDK Tools version, defaulting to 26.0.2 (3859397). The latest version number can be found at the bottom of the page [here](https://developer.android.com/studio/index.html) as a part of the download URL.
 
 ## Platform
-Currently supported platforms are `linux` and `darwin` (macosx). `windows` is not supported. Defaults to `linux`
+Currently supported platforms are `linux` and `darwin` (macosx). `windows` is not supported. Defaults to `linux`. Assumes that [unzip](https://linux.die.net/man/1/unzip) is available (may require install).
 
 ## Components
 The components are defined by the [sdkmanager](https://developer.android.com/studio/command-line/sdkmanager.html) command line tool. You can get a list of available components by running:
