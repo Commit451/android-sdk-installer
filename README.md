@@ -74,9 +74,6 @@ before_install:
 script: "./gradlew build"
 ```
 
-## Docker
-A [docker image](https://hub.docker.com/r/commit451/android-sdk-installer/) is provided for you to use for your builds. 
-
 ## Test
 Just run `ruby test/test.rb`. Set up your `android-sdk-installer.yml` as desired.
 
