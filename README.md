@@ -1,7 +1,6 @@
 # android-sdk-installer
 Easy Android SDK installation for CI servers
 
-[![Build Status](https://travis-ci.org/Commit451/android-sdk-installer.svg?branch=master)](https://travis-ci.org/Commit451/android-sdk-installer)
 [![Gem](https://img.shields.io/gem/v/android-sdk-installer.svg)](https://rubygems.org/gems/android-sdk-installer)
 
 ## Setup
